@@ -13,7 +13,10 @@ arduino端主要跑驱动，ros端跑步态算法等。实际上只要arduino也
 ![实物图1](https://github.com/Allen953/Baize_HexapodRobot_Arduino/blob/main/7.Photos%20%26%20Videos/IMG_20220804_153156.jpg)
 
 ROS下步态规划:
+
 ![仿真图](https://github.com/Allen953/Baize_HexapodRobot_Arduino/blob/main/7.Photos%20%26%20Videos/Baize_HexapodRobot_Arduino.gif)
+
+俯视图:
 
 ![实物图2](https://github.com/Allen953/Baize_HexapodRobot_Arduino/blob/main/7.Photos%20%26%20Videos/IMG_20220804_204733.jpg)
 
