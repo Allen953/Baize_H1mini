@@ -1129,7 +1129,7 @@
     </collision>
   </link>
   <joint
-    name="LF_JIAN_JOINT"
+    name="LM_JIAN_JOINT"
     type="revolute">
     <origin
       xyz="0 0.050828 0.0047"
