@@ -20,5 +20,8 @@ ROS下步态规划:
 
 ![实物图2](https://github.com/Allen953/Baize_HexapodRobot_Arduino/blob/main/7.Photos%20%26%20Videos/IMG_20220804_204733.jpg)
 
+RVIZ预览图1
+![RVIZ预览图1](https://github.com/Allen953/Baize_HexapodRobot_Arduino/blob/main/7.Photos%20%26%20Videos/2022-08-06%2012-10-19%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+
 
 
