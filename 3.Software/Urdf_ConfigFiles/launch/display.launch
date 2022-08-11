@@ -4,10 +4,7 @@
   <param
     name="robot_description"
     textfile="$(find Urdf_ConfigFiles)/urdf/Urdf_ConfigFiles.urdf" />
-  <node
-    name="joint_state_publisher_gui"
-    pkg="joint_state_publisher_gui"
-    type="joint_state_publisher_gui" />
+
   <node
     name="robot_state_publisher"
     pkg="robot_state_publisher"

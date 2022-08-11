@@ -1,0 +1,113 @@
+digraph G {
+node [shape=box];
+"base_link" [label="base_link"];
+"LB_JIAN_LINK" [label="LB_JIAN_LINK"];
+"LB_ZHOU_LINK" [label="LB_ZHOU_LINK"];
+"LB_XI_LINK" [label="LB_XI_LINK"];
+"LB_R_LINK" [label="LB_R_LINK"];
+"LB_P_LINK" [label="LB_P_LINK"];
+"LB_Y_LINK" [label="LB_Y_LINK"];
+"LF_JIAN_LINK" [label="LF_JIAN_LINK"];
+"LF_ZHOU_LINK" [label="LF_ZHOU_LINK"];
+"LF_XI_LINK" [label="LF_XI_LINK"];
+"LF_R_LINK" [label="LF_R_LINK"];
+"LF_P_LINK" [label="LF_P_LINK"];
+"LF_Y_LINK" [label="LF_Y_LINK"];
+"LM_JIAN_LINK" [label="LM_JIAN_LINK"];
+"LM_ZHOU_LINK" [label="LM_ZHOU_LINK"];
+"LM_XI_LINK" [label="LM_XI_LINK"];
+"LM_R_LINK" [label="LM_R_LINK"];
+"LM_P_LINK" [label="LM_P_LINK"];
+"LM_Y_LINK" [label="LM_Y_LINK"];
+"RB_JIAN_LINK" [label="RB_JIAN_LINK"];
+"RB_ZHOU_LINK" [label="RB_ZHOU_LINK"];
+"RB_XI_LINK" [label="RB_XI_LINK"];
+"RB_R_LINK" [label="RB_R_LINK"];
+"RB_P_LINK" [label="RB_P_LINK"];
+"RB_Y_LINK" [label="RB_Y_LINK"];
+"RF_JIAN_LINK" [label="RF_JIAN_LINK"];
+"RF_ZHOU_LINK" [label="RF_ZHOU_LINK"];
+"RF_XI_LINK" [label="RF_XI_LINK"];
+"RF_R_LINK" [label="RF_R_LINK"];
+"RF_P_LINK" [label="RF_P_LINK"];
+"RF_Y_LINK" [label="RF_Y_LINK"];
+"RM_JIAN_LINK" [label="RM_JIAN_LINK"];
+"RM_ZHOU_LINK" [label="RM_ZHOU_LINK"];
+"RM_XI_LINK" [label="RM_XI_LINK"];
+"RM_R_LINK" [label="RM_R_LINK"];
+"RM_P_LINK" [label="RM_P_LINK"];
+"RM_Y_LINK" [label="RM_Y_LINK"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_link" -> "LB_JIAN_JOINT" [label="xyz: -0.077746 0.036979 0.0047 \nrpy: 0 -0 2.3562"]
+"LB_JIAN_JOINT" -> "LB_JIAN_LINK"
+"LB_JIAN_LINK" -> "LB_ZHOU_JOINT" [label="xyz: 0.03995 0.0047 0 \nrpy: 1.5708 -0 0"]
+"LB_ZHOU_JOINT" -> "LB_ZHOU_LINK"
+"LB_ZHOU_LINK" -> "LB_XI_JOINT" [label="xyz: 0.043146 0 0.004675 \nrpy: 0 0 -1.5708"]
+"LB_XI_JOINT" -> "LB_XI_LINK"
+"LB_XI_LINK" -> "LB_R_JOINT" [label="xyz: 0.10465 -5e-05 0 \nrpy: 1.5708 -0.7854 -1.5708"]
+"LB_R_JOINT" -> "LB_R_LINK"
+"LB_R_LINK" -> "LB_P_JOINT" [label="xyz: 0 0 0 \nrpy: 0 1.5708 -0"]
+"LB_P_JOINT" -> "LB_P_LINK"
+"LB_P_LINK" -> "LB_Y_JOINT" [label="xyz: 0 0 0 \nrpy: 1.5708 -0 0"]
+"LB_Y_JOINT" -> "LB_Y_LINK"
+"base_link" -> "LF_JIAN_JOINT" [label="xyz: 0.077746 0.036979 0.0047 \nrpy: 0 -0 0.7854"]
+"LF_JIAN_JOINT" -> "LF_JIAN_LINK"
+"LF_JIAN_LINK" -> "LF_ZHOU_JOINT" [label="xyz: 0.03995 0.0047 0 \nrpy: 1.5708 -0 0"]
+"LF_ZHOU_JOINT" -> "LF_ZHOU_LINK"
+"LF_ZHOU_LINK" -> "LF_XI_JOINT" [label="xyz: 0.043096 0 0.004675 \nrpy: 0 0 -1.5708"]
+"LF_XI_JOINT" -> "LF_XI_LINK"
+"LF_XI_LINK" -> "LF_R_JOINT" [label="xyz: 0.10465 0 0 \nrpy: -1.5708 -0.7854 1.5708"]
+"LF_R_JOINT" -> "LF_R_LINK"
+"LF_R_LINK" -> "LF_P_JOINT" [label="xyz: 0 0 0 \nrpy: 0 1.5708 -0"]
+"LF_P_JOINT" -> "LF_P_LINK"
+"LF_P_LINK" -> "LF_Y_JOINT" [label="xyz: 0 0 0 \nrpy: 1.5708 -0 0"]
+"LF_Y_JOINT" -> "LF_Y_LINK"
+"base_link" -> "LM_JIAN_JOINT" [label="xyz: 0 0.050828 0.0047 \nrpy: 0 -0 1.5708"]
+"LM_JIAN_JOINT" -> "LM_JIAN_LINK"
+"LM_JIAN_LINK" -> "LM_ZHOU_JOINT" [label="xyz: 0.03995 0.0047 0 \nrpy: 1.5708 -0 0"]
+"LM_ZHOU_JOINT" -> "LM_ZHOU_LINK"
+"LM_ZHOU_LINK" -> "LM_XI_JOINT" [label="xyz: 0.043096 0 0.004675 \nrpy: 0 0 -1.5708"]
+"LM_XI_JOINT" -> "LM_XI_LINK"
+"LM_XI_LINK" -> "LM_R_JOINT" [label="xyz: 0.10465 0 0 \nrpy: 0 -1.5708 3.1416"]
+"LM_R_JOINT" -> "LM_R_LINK"
+"LM_R_LINK" -> "LM_P_JOINT" [label="xyz: 0 0 0 \nrpy: 0 1.5708 -0"]
+"LM_P_JOINT" -> "LM_P_LINK"
+"LM_P_LINK" -> "LM_Y_JOINT" [label="xyz: 0 0 0 \nrpy: 1.5708 -0 0"]
+"LM_Y_JOINT" -> "LM_Y_LINK"
+"base_link" -> "RB_JIAN_JOINT" [label="xyz: -0.077746 -0.036979 0.0047 \nrpy: 0 0 -2.3562"]
+"RB_JIAN_JOINT" -> "RB_JIAN_LINK"
+"RB_JIAN_LINK" -> "RB_ZHOU_JOINT" [label="xyz: 0.03995 0.0047 0 \nrpy: 1.5708 -0 0"]
+"RB_ZHOU_JOINT" -> "RB_ZHOU_LINK"
+"RB_ZHOU_LINK" -> "RB_XI_JOINT" [label="xyz: 0.043146 0 0.004675 \nrpy: 0 0 -1.5708"]
+"RB_XI_JOINT" -> "RB_XI_LINK"
+"RB_XI_LINK" -> "RB_R_JOINT" [label="xyz: 0.10465 -5e-05 0 \nrpy: 1.5708 0.7854 -1.5708"]
+"RB_R_JOINT" -> "RB_R_LINK"
+"RB_R_LINK" -> "RB_P_JOINT" [label="xyz: 0 0 0 \nrpy: 0 1.5708 -0"]
+"RB_P_JOINT" -> "RB_P_LINK"
+"RB_P_LINK" -> "RB_Y_JOINT" [label="xyz: 0 0 0 \nrpy: 1.5708 -0 0"]
+"RB_Y_JOINT" -> "RB_Y_LINK"
+"base_link" -> "RF_JIAN_JOINT" [label="xyz: 0.077746 -0.036979 0.0047 \nrpy: 0 0 -0.7854"]
+"RF_JIAN_JOINT" -> "RF_JIAN_LINK"
+"RF_JIAN_LINK" -> "RF_ZHOU_JOINT" [label="xyz: 0.03995 0.0047 0 \nrpy: 1.5708 -0 0"]
+"RF_ZHOU_JOINT" -> "RF_ZHOU_LINK"
+"RF_ZHOU_LINK" -> "RF_XI_JOINT" [label="xyz: 0.043146 0 0.004675 \nrpy: 0 0 -1.5708"]
+"RF_XI_JOINT" -> "RF_XI_LINK"
+"RF_XI_LINK" -> "RF_R_JOINT" [label="xyz: 0.10465 -5e-05 0 \nrpy: -1.5708 0.7854 1.5708"]
+"RF_R_JOINT" -> "RF_R_LINK"
+"RF_R_LINK" -> "RF_P_JOINT" [label="xyz: 0 0 0 \nrpy: 0 1.5708 -0"]
+"RF_P_JOINT" -> "RF_P_LINK"
+"RF_P_LINK" -> "RF_Y_JOINT" [label="xyz: 0 0 0 \nrpy: 1.5708 -0 0"]
+"RF_Y_JOINT" -> "RF_Y_LINK"
+"base_link" -> "RM_JIAN_JOINT" [label="xyz: 0 -0.050828 0.0045 \nrpy: 0 0 -1.5708"]
+"RM_JIAN_JOINT" -> "RM_JIAN_LINK"
+"RM_JIAN_LINK" -> "RM_ZHOU_JOINT" [label="xyz: 0.039955 0.0049 0.0001 \nrpy: 1.5708 -0 0"]
+"RM_ZHOU_JOINT" -> "RM_ZHOU_LINK"
+"RM_ZHOU_LINK" -> "RM_XI_JOINT" [label="xyz: 0.043146 0 0.004675 \nrpy: 0 0 -1.5708"]
+"RM_XI_JOINT" -> "RM_XI_LINK"
+"RM_XI_LINK" -> "RM_R_JOINT" [label="xyz: 0.10465 -5e-05 0 \nrpy: 0 1.5708 -3.1416"]
+"RM_R_JOINT" -> "RM_R_LINK"
+"RM_R_LINK" -> "RM_P_JOINT" [label="xyz: 0 0 0 \nrpy: 0 1.5708 -0"]
+"RM_P_JOINT" -> "RM_P_LINK"
+"RM_P_LINK" -> "RM_Y_JOINT" [label="xyz: 0 0 0 \nrpy: 1.5708 -0 0"]
+"RM_Y_JOINT" -> "RM_Y_LINK"
+}

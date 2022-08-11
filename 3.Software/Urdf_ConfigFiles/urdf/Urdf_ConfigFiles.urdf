@@ -665,7 +665,7 @@
     </collision>
   </link>
   <joint
-    name="RF_P_LINK"
+    name="RF_P_JOINT"
     type="revolute">
     <origin
       xyz="0 0 0"
@@ -1361,7 +1361,7 @@
     </collision>
   </link>
   <joint
-    name="LM_P_JOIINT"
+    name="LM_P_JOINT"
     type="revolute">
     <origin
       xyz="0 0 0"
