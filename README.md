@@ -8,6 +8,8 @@
 
 arduino端主要跑驱动，ros端跑步态算法等。实际上只要arduino也可以工作，用遥控控制即可。
 
+交流群：902595482
+
 如下图是实物图：
 
 ![实物图1](https://github.com/Allen953/Baize_HexapodRobot_Arduino/blob/main/7.Photos%20%26%20Videos/IMG_20220804_153156.jpg)
