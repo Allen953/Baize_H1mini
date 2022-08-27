@@ -16,6 +16,8 @@ $\color{red}{902595482}$
 
 ![实物图1](https://github.com/Allen953/Baize_HexapodRobot_Arduino/blob/main/7.Photos%20%26%20Videos/IMG_20220804_153156.jpg)
 
+![主控板](https://github.com/Allen953/Baize_HexapodRobot_Arduino/blob/main/7.Photos%20%26%20Videos/QQ%E5%9B%BE%E7%89%8720220826145219.png)
+
 ROS下步态规划:
 
 ![仿真图](https://github.com/Allen953/Baize_HexapodRobot_Arduino/blob/main/7.Photos%20%26%20Videos/Baize_HexapodRobot_Arduino.gif)
