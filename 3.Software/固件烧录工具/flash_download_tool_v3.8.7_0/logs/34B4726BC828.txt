@@ -1,0 +1,56 @@
+*************************** START ****************************
+START TIME: 202207222120
+CONNECT BAUD: 115200
+com port closed
+set state: ESP_DL_SYNC
+serial port opened
+-----------
+baud:115200
+root baud:115200
+-------------
+===============BAUD : 115200===============CALL DEVICE SYNC
+connecting...
+chip sync ok
+mac l: 0x726bc828L
+mac h: 0x34b4
+get mac res: 1
+get flash id : 0x00164020
+manufacturer_id: 0x20
+device_id: 0x4016
+SET FLASH PARAMS
+Wrote 1369408 bytes (868867 compressed) at 0x00000000 in 76.7 seconds (effective 142.8 kbit/s)...
+Hash of data verified.
+Leaving...
+com closed
+Use time: 79 s
+Download result: PASS
+*************************** END ****************************
+
+*************************** START ****************************
+START TIME: 202207222122
+CONNECT BAUD: 115200
+com port closed
+set state: ESP_DL_SYNC
+serial port opened
+-----------
+baud:115200
+root baud:115200
+-------------
+===============BAUD : 115200===============CALL DEVICE SYNC
+connecting...
+chip sync ok
+mac l: 0x726bc828L
+mac h: 0x34b4
+get mac res: 1
+get flash id : 0x00164020
+manufacturer_id: 0x20
+device_id: 0x4016
+SET FLASH PARAMS
+Wrote 1369408 bytes (868867 compressed) at 0x00000000 in 16.7 seconds (effective 655.2 kbit/s)...
+Hash of data verified.
+Leaving...
+com closed
+Use time: 20 s
+Download result: PASS
+*************************** END ****************************
+
