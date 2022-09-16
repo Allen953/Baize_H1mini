@@ -12,9 +12,19 @@ for Urdf_ConfigFiles robot</p>
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roslaunch</depend>
   <depend>robot_state_publisher</depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
   <depend>rviz</depend>
   <depend>joint_state_publisher_gui</depend>
   <depend>gazebo</depend>
+  <build_depend>message_generation</build_depend>
+  <depend>std_msgs</depend>
+    <build_depend>robot_msg</build_depend>
+  <build_export_depend>robot_msg</build_export_depend>
+  <exec_depend>robot_msg</exec_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
   <export>
     <architecture_independent />
   </export>
