@@ -1,6 +1,8 @@
 # Baize_HexapodRobot_Arduino
 
-DIY交流群：902595482。
+$\color{red}{DIY交流群：902595482。}$
+
+
 
 实际上这个机械结构是国外老哥做的一款arduino六足机器人。
 
@@ -9,10 +11,6 @@ DIY交流群：902595482。
 目前主要用arduino和ros两种软件平台来做，可以用于学习arduino或者ros编程，同时也可以将ros于arduino结合。
 
 arduino端主要跑驱动，ros端跑步态算法等。实际上只要arduino也可以工作，用遥控控制即可。
-
-交流群：
-
-$\color{red}{902595482}$
 
 如下图是实物图：
 
