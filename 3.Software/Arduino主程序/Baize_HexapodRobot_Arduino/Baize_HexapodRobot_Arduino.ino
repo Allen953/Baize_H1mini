@@ -1,6 +1,6 @@
 /*******************************************************
    主板：Baize_ServoDriver_esp8266
-   功能：UnderWaterHexapodRobot水下六足机器人Arduino程序
+   功能：Baize_H1mini六足机器人Arduino程序
    引脚：SDA:21   SCL:22
    对于ARDUINO UNO，SCL:A5，SDA:A4
    Designer: Allen
@@ -11,9 +11,10 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include "StepData.h"
-#define led 2
+#define led 2               //led为低电平时，灯亮；高电平时，灯灭
 #define MAX_SRV_CLIENTS 3   //最大同时联接数，即你想要接入的设备数量，8266tcpserver只能接入五个
 #define del 100
+#define deltr 3
 
 const char *ssid = "Baize"; 
 const char *password = "baizerobot"; 
@@ -34,14 +35,18 @@ WiFiClient serverClients[MAX_SRV_CLIENTS];
 
 //pwm.setPWM(i, 0, pulselen);第一个参数是通道数;第二个是高电平起始点，也就是从0开始;第三个参数是高电平终止点。
 
-char cmd = 'e';//a:forward;   b:backward;   c:left;   d:right;   e:stop;
+//a:前进; b:后退; c:左转; d:右转; e:停止; f:向左横行 g:向右横行 h:步态切换 i:身高切换；
+//last_cmd表示上一个指令，可以表示机器人状态。
+char cmd = 'e',last_cmd = 'e';
+//gait表示步态，1为波动步态，0为三角步态；body表示身高，0为最低，1为中间，2为最高;robotstatus为机器人状态，
+int gait=0,body=0,robotstatus=0;
 int rec[18] = {
-  320,320,327,
-  327,345,310,
-  350,327,310,
-  350,327,337,
-  327,327,350,
-  350,340,320
+  349,332,324,
+  335,335,301,
+  338,325,327,
+  323,315,319,
+  307,323,327,
+  330,339,299
 };
 int direct[18] = {-1,1,1,
 -1,1,1,
@@ -51,17 +56,63 @@ int direct[18] = {-1,1,1,
 -1,1,1
 };
 
+//舵机执行函数，通过执行该函数，将会驱动18个舵机运动至s[18]数组传递的角度位置
+void DireceServo(float s[18])
+{
+          for(int i=0;i<16;i++)
+          {
+            pwm.setPWM(i, 0, map(s[i]*direct[i],-90,90,-225,225)+rec[i]);
+            
+          }
+          pwm1.setPWM(16-16, 0, map(s[16]*direct[16],-90,90,-225,225)+rec[16]);
+          pwm1.setPWM(17-16, 0, map(s[17]*direct[17],-90,90,-225,225)+rec[17]);
+};
+
+void iic_device_test()//扫描iic芯片，如果开机闪烁一次，说明是0x40未扫描到；如果闪烁两次，则是0x41未扫描到。
+{
+  bool iic_flag[2];//定义一个iic标志数组用于表示iic扫描结果
+  Wire.beginTransmission(0x40);
+  if(Wire.endTransmission()!=0)//0是扫描到设备了，非0是未扫描到设备。
+  while(1)
+  {
+    digitalWrite(led,0);
+    delay(100);
+    digitalWrite(led,1);
+    delay(1000);
+  }
+  Wire.beginTransmission(0x41);
+  if(Wire.endTransmission()!=0)//0是扫描到设备了，非0是未扫描到设备。
+  while(1)
+  {
+    digitalWrite(led,0);
+    delay(100);
+    digitalWrite(led,1);
+    delay(100);
+    digitalWrite(led,0);
+    delay(100);
+    digitalWrite(led,1);
+    delay(1000);
+  }
+};
 
 void setup() {
   // put your setup code here, to run once:
+  pinMode(led, OUTPUT);
+  digitalWrite(led, 1);//led为低电平时，灯亮；高电平时，灯灭
   Serial.begin(115200);
   Serial.println();
-  Serial.println("16 channel Servo test!");
+  Serial.println("Baize_HexapodRobot program!");
+
+  Wire.begin();//开启IIC通信
+  iic_device_test();
+  
   
   pwm.begin();
   pwm1.begin();
   pwm.setPWMFreq(50);  // Analog servos run at ~50 Hz updates
   pwm1.setPWMFreq(50);  // Analog servos run at ~50 Hz updates
+
+  
   
     for(int i=0;i<16;i++)
     {
@@ -73,15 +124,20 @@ void setup() {
       ESP.wdtFeed();                    //喂狗防止复位
   delay(100);
   
-  pinMode(led, OUTPUT);
+  
   digitalWrite(led, 0);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED)
   {
         delay(500);
+        Serial.print(".");
   }
   server.begin();
   server.setNoDelay(true);  //加上后才正常些
+
+
+  delay(1000);
+  DireceServo(forward[0]);
 
 }
 
@@ -121,36 +177,59 @@ void loop() {
         }
     }
 
-    if(cmd == 'a')//前进
+    if(cmd == 'a')          //前进
     {
-      for(int j=0;j<120;j++)
+      if(gait==0)//如果是三角步态
       {
-          for(int i=0;i<16;i++)
+          for(int j=0;j<40;j++)
           {
-            pwm.setPWM(i, 0, map(forwardF[j][i]*direct[i],-90,90,-225,225)+rec[i]);
-            
+              DireceServo(forward[j]);
+              ESP.wdtFeed();                    //喂狗防止复位
+              delay(deltr);
           }
-          pwm1.setPWM(16-16, 0, map(forwardF[j][16]*direct[16],-90,90,-225,225)+rec[16]);
-          pwm1.setPWM(17-16, 0, map(forwardF[j][17]*direct[17],-90,90,-225,225)+rec[17]);
-          ESP.wdtFeed();                    //喂狗防止复位
-          delayMicroseconds(del);
       }
+      else if(gait==1)//如果是波动步态
+      {
+          for(int j=0;j<120;j++)
+          {
+              DireceServo(forwardF[j]);
+              ESP.wdtFeed();                    //喂狗防止复位
+              delayMicroseconds(del);
+          }
+      }
+//        for(int j=0;j<120;j++)
+//          {
+//              DireceServo(forwardF[j]);
+//              ESP.wdtFeed();                    //喂狗防止复位
+//              delayMicroseconds(del);
+//          }
     }
     else if(cmd == 'b')//后退
     {
-      for(int j=0;j<120;j++)
+      if(gait==0)//如果是三角步态
       {
-          for(int i=0;i<16;i++)
+          for(int j=0;j<40;j++)
           {
-            pwm.setPWM(i, 0, map(forwardF[119-j][i]*direct[i],-90,90,-225,225)+rec[i]);
-            
+              DireceServo(forward[39-j]);
+              ESP.wdtFeed();                    //喂狗防止复位
+              delay(deltr);
           }
-          pwm1.setPWM(16-16, 0, map(forwardF[119-j][16]*direct[16],-90,90,-225,225)+rec[16]);
-          pwm1.setPWM(17-16, 0, map(forwardF[119-j][17]*direct[17],-90,90,-225,225)+rec[17]);
-          ESP.wdtFeed();                    //喂狗防止复位
-          delayMicroseconds(del);
-      }      
-      
+      }
+      else if(gait==1)//如果是波动步态
+      {
+          for(int j=0;j<120;j++)
+          {
+              DireceServo(forwardF[119-j]);
+              ESP.wdtFeed();                    //喂狗防止复位
+              delayMicroseconds(del);
+          }
+      }
+//          for(int j=0;j<120;j++)
+//          {
+//              DireceServo(forwardF[119-j]);
+//              ESP.wdtFeed();                    //喂狗防止复位
+//              delayMicroseconds(del);
+//          }
     }
     else if(cmd == 'c')
     {
@@ -201,13 +280,7 @@ void loop() {
     {
       for(int j=0;j<120;j++)
       {
-          for(int i=0;i<16;i++)
-          {
-            pwm.setPWM(i, 0, map(forwardFH[j][i]*direct[i],-90,90,-225,225)+rec[i]);
-            
-          }
-          pwm1.setPWM(16-16, 0, map(forwardFH[j][16]*direct[16],-90,90,-225,225)+rec[16]);
-          pwm1.setPWM(17-16, 0, map(forwardFH[j][17]*direct[17],-90,90,-225,225)+rec[17]);
+          DireceServo(forwardFH[j]);
           ESP.wdtFeed();                    //喂狗防止复位
           delayMicroseconds(del);
       }
@@ -216,17 +289,19 @@ void loop() {
     {
       for(int j=0;j<120;j++)
       {
-          for(int i=0;i<16;i++)
-          {
-            pwm.setPWM(i, 0, map(forwardFH[119-j][i]*direct[i],-90,90,-225,225)+rec[i]);
-            
-          }
-          pwm1.setPWM(16-16, 0, map(forwardFH[119-j][16]*direct[16],-90,90,-225,225)+rec[16]);
-          pwm1.setPWM(17-16, 0, map(forwardFH[119-j][17]*direct[17],-90,90,-225,225)+rec[17]);
+          DireceServo(forwardFH[199-j]);
           ESP.wdtFeed();                    //喂狗防止复位
           delayMicroseconds(del);
       }      
-      
+    }
+    else if(cmd == 'h')//向右横移
+    {
+      gait=!gait;
+    }
+    else if(cmd == 'i')//向右横移
+    {
+      i++;
+      i=i%3;
     }
     else
     {
