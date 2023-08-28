@@ -41,12 +41,12 @@ char cmd = 'e',last_cmd = 'e';
 //gait表示步态，1为波动步态，0为三角步态；body表示身高，0为最低，1为中间，2为最高;robotstatus为机器人状态，
 int gait=0,body=0,robotstatus=0;
 int rec[18] = {
-  349,332,324,
-  335,335,301,
-  338,325,327,
-  323,315,319,
-  307,323,327,
-  330,339,299
+  327,327,327,
+  335,335,327,
+  327,327,327,
+  327,327,327,
+  327,327,327,
+  327,327,327
 };
 int direct[18] = {-1,1,1,
 -1,1,1,
@@ -66,6 +66,12 @@ void DireceServo(float s[18])
           }
           pwm1.setPWM(16-16, 0, map(s[16]*direct[16],-90,90,-225,225)+rec[16]);
           pwm1.setPWM(17-16, 0, map(s[17]*direct[17],-90,90,-225,225)+rec[17]);
+
+          //如果想要更改舵机插口，需要写如下代码并把本函数内上方代码全部注释掉
+          //舵机如果插在0-15号引脚，调用下面这个代码，m是板子上的接口号，i是机器人的关节号
+          //pwm.setPWM(m, 0, map(s[i]*direct[i],-90,90,-225,225)+rec[i]);
+          //舵机如果插在16-31号引脚，调用下面这个代码，m是板子上的接口号，i是机器人的关节号
+          //pwm1.setPWM(m-16, 0, map(s[i]*direct[i],-90,90,-225,225)+rec[i]);
 };
 
 void iic_device_test()//扫描iic芯片，如果开机闪烁一次，说明是0x40未扫描到；如果闪烁两次，则是0x41未扫描到。
@@ -294,14 +300,24 @@ void loop() {
           delayMicroseconds(del);
       }      
     }
-    else if(cmd == 'h')//向右横移
+    else if(cmd == 'h')//切换步态
     {
       gait=!gait;
     }
-    else if(cmd == 'i')//向右横移
+    else if(cmd == 'i')//切换身高
     {
       i++;
       i=i%3;
+    }
+    else if(cmd == 'j')//原地蹲起
+    {
+          for(int j=0;j<40;j++)
+          {
+              DireceServo(dunqi[j]);
+              delay(deltr*10);
+              ESP.wdtFeed();                    //喂狗防止复位
+              
+          }
     }
     else
     {
